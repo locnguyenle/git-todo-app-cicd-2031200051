@@ -9,27 +9,45 @@ test('End-to-end user workflow', async () => {
 
     // --- TODO: Task 1: Add a new todo item ---
     // 1. Find the input field (use a locator like window.locator('#todo-input')).
+    const input = window.locator('#todo-input');
+
     // 2. Type the `taskText` into it.
+    await input.fill(taskText);
+
     // 3. Find and click the "Add" button.
+    await window.locator('button[type="submit"], button').first().click();
 
 
     // --- TODO: Task 2: Verify the todo item was added ---
     // 1. Locate the new todo item in the list. A good locator might be `window.locator('.todo-item')`.
+    const todoItem = window.locator('.todo-item').first();
+
     // 2. Assert that its text content contains the `taskText`.
-    
+    await expect(todoItem).toContainText(taskText);
+
 
     // --- TODO: Task 3: Mark the todo item as complete ---
     // 1. Find the checkbox within the new todo item.
+    const checkbox = todoItem.locator('input[type="checkbox"]');
+
     // 2. Click the checkbox.
+    await checkbox.click();
+
     // 3. Assert that the todo item now has the 'completed' class.
+    await expect(todoItem).toHaveClass(/completed/);
 
 
     // --- TODO: Task 4: Delete the todo item ---
     // 1. Find the delete button within the todo item.
+    const deleteBtn = todoItem.locator('.delete-btn');
+
     // 2. Click the delete button.
+    await deleteBtn.click();
+
     // 3. Assert that the todo item is no longer visible on the page.
+    await expect(todoItem).not.toBeVisible();
 
 
-    // Close the app
-    await electronApp.close();
-});
+        // Close the app
+        await electronApp.close();
+    });

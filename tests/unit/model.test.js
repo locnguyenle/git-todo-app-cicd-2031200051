@@ -10,13 +10,14 @@ describe('TodoService Unit Tests', () => {
         service.todos = [];
     });
 
-    test('should add a new todo', () => {
-        // TODO: Call the addTodo method with some text.
+   test('should add a new todo', () => {
+ 
         service.addTodo('Học Design Patterns');
-        // Then, assert that the service's todos array has a length of 1.
+
         expect(service.todos.length).toBe(1);
-        // Assert that the text of the first todo matches the input text.
+
         const todoText = service.todos[0].text || service.todos[0].title;
+        
         expect(todoText).toBe('Học Design Patterns');
     });
 
